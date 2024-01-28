@@ -1,0 +1,23 @@
+rust_library {
+    name: "libmysimpleparcelableservice",
+    srcs: ["src/lib.rs"],
+    crate_name: "mysimpleparcelableservice",
+    rustlibs: [
+        "libmy_simple_parcelable_rust",
+        "com.example.mysimpleparcelableservice-rust",
+        "libbinder_rs",
+    ],
+}
+
+rust_binary {
+    name: "my_simple_parcelable_server",
+    crate_name: "my_simple_parcelable_server",
+    srcs: ["src/server.rs"],
+    rustlibs: [
+        "libmy_simple_parcelable_rust",
+        "com.example.mysimpleparcelableservice-rust",
+        "libbinder_rs",
+        "libmysimpleparcelableservice",
+    ],
+    prefer_rlib: true, // To avoid dynamic link error.
+}
